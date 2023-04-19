@@ -29,6 +29,12 @@ public class SampleController {
         return "admin info";
     }
 
+    @GetMapping("/both")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public String getBoth() {
+        return "both info";
+    }
+
     @GetMapping("/me")
     public Object getMe() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
