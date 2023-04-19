@@ -22,8 +22,8 @@ public class SampleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = "/producer", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('PRODUCER')")
     public ModelAndView getAdminInfo() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
@@ -33,8 +33,8 @@ public class SampleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('USER')")
+    @RequestMapping(value = "/consumer", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('CONSUMER')")
     public ModelAndView getUserInfo() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
@@ -45,7 +45,7 @@ public class SampleController {
     }
 
     @RequestMapping(value = "/both", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('PRODUCER', 'CONSUMER')")
     public ModelAndView getBoth() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
