@@ -6,8 +6,8 @@ keycloak:
   auth-server-url: http://localhost:8484
   realm: my_realm
   resource: my_client
-  public-client: true
+#  public-client: true
+  credentials:
+    secret: ynflzcr1ZSw8COS3MDyHeN3TytDJU1xh
 #  ssl-required: external
-#  credentials:
-#    secret: AEwZX8t9uifMhqGiTAA3dNt96Y94SGdw
 #  bearer-only: true
