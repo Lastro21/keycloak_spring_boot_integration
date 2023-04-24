@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/api")
 public class SampleController {
 
-    @RequestMapping(value = "/anonymous", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/anonymous", method = RequestMethod.GET)
     public ModelAndView getAnonymousInfo() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
@@ -22,7 +21,7 @@ public class SampleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/producer", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/producer", method = RequestMethod.GET)
     @PreAuthorize("hasRole('PRODUCER')")
     public ModelAndView getAdminInfo() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,7 +32,7 @@ public class SampleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/consumer", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/consumer", method = RequestMethod.GET)
     @PreAuthorize("hasRole('CONSUMER')")
     public ModelAndView getUserInfo() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,9 +43,19 @@ public class SampleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/both", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/both", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('PRODUCER', 'CONSUMER')")
     public ModelAndView getBoth() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
+
+        final ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("full");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ui", method = RequestMethod.GET)
+    public ModelAndView getUi() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName());
 
